@@ -1,6 +1,7 @@
 
 import os
 from notion.client import NotionClient
+from notion.block import TextBlock
 from flask import Flask
 from flask import request
 
@@ -8,21 +9,23 @@ from flask import request
 app = Flask(__name__)
 
 
-def createNotionTask(token, collectionURL, content):
+def createNotionTask(token, collectionURL, title, content):
     # notion
     client = NotionClient(token)
     cv = client.get_collection_view(collectionURL)
     row = cv.collection.add_row()
-    row.title = content
+    row.title = title
+    row.children.add_new(TextBlock,title=content
 
 
 @app.route('/create_todo', methods=['GET'])
 def create_todo():
 
-    todo = request.args.get('todo')
+    title = request.args.get('title')
+    content = request.args.get('content')
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
-    createNotionTask(token_v2, url, todo)
+    createNotionTask(token_v2, url, title, content)
     return f'added {todo} to Notion'
 
 
