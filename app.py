@@ -15,7 +15,7 @@ def createNotionTask(token, collectionURL, title, content):
     cv = client.get_collection_view(collectionURL)
     row = cv.collection.add_row()
     row.title = title
-    row.children.add_new(TextBlock,title=content
+    row.children.add_new(TextBlock,title=content)
 
 
 @app.route('/create_todo', methods=['GET'])
