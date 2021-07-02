@@ -23,8 +23,8 @@ def create_task(
             channel_id=body["channel_id"],
             title=title,
         )
-        print(response)
-        response_msg = f"Added a new task: '{title}'!"
+        task_url = response["url"]
+        response_msg = f"Task added: {task_url}"
     except Exception as err:
         traceback.print_exc()
         logger.error(f"Error adding task: {err}")
