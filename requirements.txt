@@ -1,2 +1,2 @@
-notion
+notion_client
 slack_bolt
